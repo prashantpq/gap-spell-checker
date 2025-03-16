@@ -1,7 +1,10 @@
 # Contextual Spell Checker using Flask & PySpellChecker
 
 ## 📌 Overview
-This project implements a **Contextual Spell Checker** using **Flask** and **PySpellChecker**. It allows users to input a sentence, detects spelling mistakes, and provides corrected text while highlighting the errors. The application is deployed on **Google Cloud App Engine**, making it accessible from anywhere.
+This project implements a **Contextual Spell Checker** using **Flask** and **PySpellChecker**. It allows users to input a sentence, detects spelling mistakes, and provides corrected text while highlighting the errors.  
+
+You can try the **live version** here:  
+🔗 **[GCP Spell Checker Web App](https://gcp-spellchecker-project.uc.r.appspot.com)**  
 
 ---
 
@@ -9,7 +12,7 @@ This project implements a **Contextual Spell Checker** using **Flask** and **PyS
 
 ### 1️⃣ Clone the repository:
 ```sh
-git clone https://github.com/prashantpq/gcp-spell-checker.git
+git clone https://github.com/yourusername/gcp-spellchecker.git
 cd gcp-spellchecker
 ```
 
@@ -25,17 +28,6 @@ venv\Scripts\activate     # On Windows
 pip install -r requirements.txt
 ```
 
-### 4️⃣ Set Up Google Cloud Authentication:
-1. **Download your service account key** from [Google Cloud IAM](https://console.cloud.google.com/iam-admin/serviceaccounts).
-2. **Move the key to your project folder:**
-   ```sh
-   mv ~/Downloads/YOUR-KEY-FILE.json ~/Desktop/gcp-spellchecker/
-   ```
-3. **Set the environment variable manually:**
-   ```sh
-   export GOOGLE_APPLICATION_CREDENTIALS="$HOME/Desktop/gcp-spellchecker/YOUR-KEY-FILE.json"
-   ```
-
 ---
 
 ## 🛠 Running the Project Locally
@@ -50,33 +42,13 @@ python main.py
 
 ---
 
-## 🚀 Deploying to Google Cloud
-
-### 1️⃣ Authenticate with Google Cloud:
-```sh
-gcloud auth application-default login
-gcloud config set project your-gcp-project-id
-```
-
-### 2️⃣ Deploy the App to App Engine:
-```sh
-gcloud app deploy --no-cache
-```
-
-### 3️⃣ Open the Deployed Application:
-```sh
-gcloud app browse
-```
-
----
-
 ## 📜 Features
 
 ✔ **Spell Checking:** Detects and corrects misspelled words.  
 ✔ **Highlighted Fixes:** Misspelled words are highlighted in yellow after correction.  
 ✔ **User-Friendly Interface:** Simple input field with a **Check Spelling** button.  
 ✔ **Copy Button:** Allows users to copy the corrected text.  
-✔ **Deployed on Google Cloud:** Runs as a Flask web app on **Google Cloud App Engine**.
+✔ **Deployed on Google Cloud:** Available at **[this link](https://gcp-spellchecker-project.uc.r.appspot.com)**  
 
 ---
 
@@ -98,20 +70,21 @@ gcp-spellchecker/
 - **Python** (Flask)
 - **PySpellChecker** (for spell correction)
 - **HTML, CSS, JavaScript** (Frontend)
-- **Google Cloud App Engine** (Deployment)
+- **Google Cloud App Engine** (Hosting)
 
 ---
 
 ## 📌 Future Improvements
 🔹 Improve UI with better styling.  
 🔹 Add **Grammar Checking** support.  
-🔹 Implement **Sentence Context Analysis**.
+🔹 Implement **Sentence Context Analysis**.  
 
 ---
 
 ## 📜 License
-MIT LICENSE.
+This project is open-source and available for free use.
 
 ---
 
-**🎉 Enjoy using your Contextual Spell Checker! 🚀🔥**
+**🎉 Enjoy using your Contextual Spell Checker! 🚀🔥**  
+🔗 **Try it now:** [https://gcp-spellchecker-project.uc.r.appspot.com](https://gcp-spellchecker-project.uc.r.appspot.com)
