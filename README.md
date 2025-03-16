@@ -1,4 +1,4 @@
-# GCP Spell Checker using Google Cloud NLP
+# Contextual Spell Checker using Flask & PySpellChecker
 
 ## 📌 Overview
 This project implements a **Spell Checker API** using **Google Cloud Natural Language API**.
