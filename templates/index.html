@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contextual Spell Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6dd5ed, #2193b0);
+            text-align: center;
+            padding: 30px;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #000;
+        }
+
+        input {
+            width: 60%;
+            padding: 12px;
+            font-size: 18px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            outline: none;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px 20px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #loading {
+            display: none;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        #result {
+            background: #fff;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #correctedText span {
+            background-color: yellow;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        .copy-btn {
+            margin-top: 10px;
+            padding: 8px 12px;
+            font-size: 14px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            background-color: #218838;
+        }
+
+        @media screen and (max-width: 768px) {
+            input {
+                width: 90%;
+                font-size: 16px;
+            }
+
+            button {
+                font-size: 16px;
+                padding: 10px 16px;
+            }
+
+            #result {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Contextual Spell Checker</h1>
+    
+    <input type="text" id="inputText" placeholder="Type a sentence with spelling mistakes...">
+    <br>
+    <button onclick="checkSpelling()">Check Spelling</button>
+
+    <p id="loading">🔄 Checking spelling, please wait...</p>
+
+    <div id="result" style="display:none;">
+        <p><strong>Original Text:</strong> <span id="originalText"></span></p>
+        <p><strong>Corrected Text:</strong> <span id="correctedText"></span></p>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 Copy</button>
+    </div>
+
+    <script>
+        function checkSpelling() {
+            let inputText = document.getElementById("inputText").value;
+            if (!inputText.trim()) {
+                alert("Please enter some text to check.");
+                return;
+            }
+
+            document.getElementById("loading").style.display = "block";
+            document.getElementById("result").style.display = "none";
+
+            fetch("/spell_check", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text: inputText })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("originalText").textContent = data.original_text;
+                document.getElementById("correctedText").innerHTML = data.highlighted_text;  // Use highlighted text
+
+                document.getElementById("loading").style.display = "none";
+                document.getElementById("result").style.display = "block";
+            })
+            .catch(error => {
+                document.getElementById("loading").style.display = "none";
+                alert("Error checking spelling. Please try again.");
+                console.error(error);
+            });
+        }
+
+        function copyToClipboard() {
+            let correctedText = document.getElementById("correctedText").innerText;
+            navigator.clipboard.writeText(correctedText).then(() => {
+                alert("Corrected text copied to clipboard!");
+            });
+        }
+    </script>
+
+</body>
+</html>
